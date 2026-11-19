@@ -1,0 +1,135 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 22,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "macos",
+      "displayName": "macOS native architecture (Metal GPU)",
+      "binaryDir": "${sourceDir}/build/macos",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "ASSISTANT_BUILD_LLAMA": "ON",
+        "ASSISTANT_GPU_BACKEND": "METAL"
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Darwin"
+      }
+    },
+    {
+      "name": "linux",
+      "displayName": "Linux (automatic GPU detection)",
+      "binaryDir": "${sourceDir}/build/linux",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Linux"
+      }
+    },
+    {
+      "name": "windows",
+      "displayName": "Windows (Visual Studio toolchain)",
+      "binaryDir": "${sourceDir}/build/windows",
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      }
+    },
+    {
+      "name": "macos-arm64",
+      "inherits": "macos",
+      "displayName": "Apple Silicon (Metal GPU)",
+      "binaryDir": "${sourceDir}/build/macos-arm64",
+      "cacheVariables": {
+        "ASSISTANT_GPU_BACKEND": "METAL",
+        "CMAKE_OSX_ARCHITECTURES": "arm64"
+      }
+    },
+    {
+      "name": "macos-intel",
+      "inherits": "macos",
+      "displayName": "Intel macOS (Metal GPU)",
+      "binaryDir": "${sourceDir}/build/macos-intel",
+      "cacheVariables": {
+        "ASSISTANT_GPU_BACKEND": "METAL",
+        "CMAKE_OSX_ARCHITECTURES": "x86_64"
+      }
+    },
+    {
+      "name": "linux-gpu",
+      "inherits": "linux",
+      "displayName": "Linux (Vulkan GPU required)",
+      "binaryDir": "${sourceDir}/build/linux-gpu",
+      "cacheVariables": {
+        "ASSISTANT_GPU_BACKEND": "VULKAN"
+      }
+    },
+    {
+      "name": "windows-gpu",
+      "inherits": "windows",
+      "displayName": "Windows (Vulkan GPU required)",
+      "binaryDir": "${sourceDir}/build/windows-gpu",
+      "cacheVariables": {
+        "ASSISTANT_GPU_BACKEND": "VULKAN"
+      }
+    },
+    {
+      "name": "cpu",
+      "displayName": "Any platform (CPU fallback)",
+      "binaryDir": "${sourceDir}/build/cpu",
+      "cacheVariables": {
+        "ASSISTANT_GPU_BACKEND": "CPU",
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "macos",
+      "configurePreset": "macos"
+    },
+    {
+      "name": "linux",
+      "configurePreset": "linux"
+    },
+    {
+      "name": "windows",
+      "configurePreset": "windows",
+      "configuration": "Release"
+    },
+    {
+      "name": "macos-arm64",
+      "configurePreset": "macos-arm64",
+      "configuration": "Release"
+    },
+    {
+      "name": "macos-intel",
+      "configurePreset": "macos-intel",
+      "configuration": "Release"
+    },
+    {
+      "name": "linux-gpu",
+      "configurePreset": "linux-gpu",
+      "configuration": "Release"
+    },
+    {
+      "name": "windows-gpu",
+      "configurePreset": "windows-gpu",
+      "configuration": "Release"
+    },
+    {
+      "name": "cpu",
+      "configurePreset": "cpu",
+      "configuration": "Release"
+    }
+  ]
+}

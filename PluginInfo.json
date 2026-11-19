@@ -1,0 +1,6 @@
+{
+  "name": "Knowledge Assistant",
+  "version": {"plugin": "1.0.0", "core": ["1.5"]},
+  "type": "View",
+  "dependencies": []
+}

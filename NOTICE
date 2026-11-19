@@ -1,0 +1,15 @@
+Knowledge Assistant plugin
+Copyright (c) 2026 Local Knowledge Assistant contributors
+Plugin source: MIT (see LICENSE).
+
+Bundled or linked components retain their own licenses:
+- ManiVault SDK: LGPL-3.0-or-later; https://github.com/ManiVaultStudio/core
+- Qt: the license applicable to your Qt distribution; https://www.qt.io/licensing
+- llama.cpp / ggml: MIT; https://github.com/ggml-org/llama.cpp
+- nlohmann/json: MIT; https://github.com/nlohmann/json
+- Qt Tooltip Kit: Apache-2.0; https://github.com/sbvis/qt-tooltip-kit
+- Model and source documents: see the licenses in the model package.
+
+The installer includes available bundled dependency license texts under
+Plugins/ChatAssistantPlugin/licenses. This plugin's MIT license does not
+relicense the host, its SDK, Qt, the model or the source documents.

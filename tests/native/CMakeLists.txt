@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 3.22)
+project(AssistantSmoke LANGUAGES CXX)
+find_package(Qt6 REQUIRED COMPONENTS Core Gui Sql)
+set(CMAKE_AUTOMOC ON)
+add_executable(assistant-smoke smoke.cpp ../../src/KnowledgeIndex.cpp ../../src/OfflineInference.cpp ../../src/RuntimePaths.cpp)
+target_include_directories(assistant-smoke PRIVATE ../../src)
+target_compile_features(assistant-smoke PRIVATE cxx_std_20)
+target_link_libraries(assistant-smoke PRIVATE Qt6::Core Qt6::Gui Qt6::Sql)

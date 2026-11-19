@@ -1,0 +1,16 @@
+# Keep text portable and consistent with .editorconfig on every platform.
+* text=auto eol=lf
+
+# Windows command scripts require CRLF endings.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Preserve binary assets without line-ending conversion.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.gguf binary
+*.db binary
