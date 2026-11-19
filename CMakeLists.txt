@@ -23,8 +23,16 @@ option(ASSISTANT_ENABLE_AVX2 "Use AVX2/FMA CPU acceleration on x86 (disable for 
 set(ASSISTANT_GPU_BACKEND "AUTO" CACHE STRING "Inference backend: AUTO, CPU, METAL or VULKAN")
 set_property(CACHE ASSISTANT_GPU_BACKEND PROPERTY STRINGS AUTO CPU METAL VULKAN)
 set(ASSISTANT_PACKAGE_DIR "" CACHE PATH "Local trainer release folder containing assistant.gguf and knowledge.db")
-set(_default_package_url "https://sec.lumc.nl/mtg-viewer/MV_data/CytosploreViewer/TutorialModels/tutorials-papers-assistant.zip")
-set(_default_package_sha256 "d6cdfd84ae7ae47b693f48ac8e1612fe3dc49c957675b19c670a7f28e643cc34")
+set(_default_package_url "https://sec.lumc.nl/mtg-viewer/MV_data/CytosploreViewer/TutorialModels/manivault-trained-assistant-small.zip")
+set(_default_package_sha256 "786A6A50B3585205C88F896803834937D2FCC53723F359DA3FC83CD5AE0E9369")
+#[[
+    USE Either
+        set(_default_package_url "https://sec.lumc.nl/mtg-viewer/MV_data/CytosploreViewer/TutorialModels/manivault-trained-assistant-small.zip")
+        set(_default_package_sha256 "786A6A50B3585205C88F896803834937D2FCC53723F359DA3FC83CD5AE0E9369")
+    OR
+        set(_default_package_url "https://sec.lumc.nl/mtg-viewer/MV_data/CytosploreViewer/TutorialModels/manivault-trained-assistant-large.zip")
+        set(_default_package_sha256 "FF26D6ADB246EC627A913825364C9EB523B0B11DCDA33347858F9DDD34E4430D")
+]]
 if(ASSISTANT_PACKAGE_DIR)
   set(_default_package_url "")
   set(_default_package_sha256 "")
