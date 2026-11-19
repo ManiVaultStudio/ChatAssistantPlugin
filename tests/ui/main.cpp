@@ -25,6 +25,38 @@ class ChatPanelTest {
 public:
     static int run(const QString& output) {
         ChatPanel panel(nullptr, false);
+        const QString tutorial = QString::fromUtf8(R"html(
+<div class="instruction-block">
+    <div class="instruction-content">
+        <i class="instruction-icon"></i> <b>Pan:</b> Hold <b>Alt</b> and drag.<br/>
+        <i class="instruction-icon"></i> <b>Zoom:</b> Hold <b>Alt</b> and scroll.<br/>
+        <em>Note: Keep the cursor inside the view.</em>
+    </div>
+    <details class="demo-details">
+        <summary>Watch: Basic navigation</summary>
+        <img data-src="/navigation.gif" alt="Navigation">
+    </details>
+</div>
+<!-- GO enrichment -->
+<details>
+    <summary class="section-header"><span class="icon"><i class="fa-solid fa-dna"></i></span>GO Enrichment Analysis</summary>
+    <div><strong>Settings:</strong> Select the organism.</div>
+</details>
+)html");
+        QTextDocument excerpt;
+        excerpt.setMarkdown(readableTutorialMarkdown(tutorial),
+                            QTextDocument::MarkdownFeatures(QTextDocument::MarkdownDialectGitHub) | QTextDocument::MarkdownNoHTML);
+        const auto excerptHtml = excerpt.toHtml();
+        const auto excerptText = excerpt.toPlainText();
+        if (!excerptHtml.contains("<h3") || !excerptHtml.contains("font-weight:700") ||
+            !excerptText.contains("Pan: Hold Alt and drag.") ||
+            !excerptText.contains("Zoom: Hold Alt and scroll.") ||
+            !excerptText.contains("Note: Keep the cursor inside the view.") ||
+            !excerptText.contains("GO Enrichment Analysis") ||
+            excerptText.contains("instruction-block") || excerptText.contains("navigation.gif") ||
+            excerptText.contains("<!--")) return 57;
+        const auto code = QString::fromLatin1("~~~html\n<div>Sample</div>\n~~~");
+        if (readableTutorialMarkdown(code) != code) return 58;
         for (auto *shortcut : panel.findChildren<QShortcut *>(QString(), Qt::FindDirectChildrenOnly))
             if (shortcut->context() != Qt::WidgetWithChildrenShortcut) return 56;
         panel.resize(1280, 820);

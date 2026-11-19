@@ -130,7 +130,9 @@ if(ASSISTANT_BUILD_LLAMA)
   else()
     FetchContent_Declare(assistant_llama
       URL "https://codeload.github.com/ggml-org/llama.cpp/tar.gz/${ASSISTANT_LLAMA_COMMIT}"
-      URL_HASH "SHA256=${ASSISTANT_LLAMA_SOURCE_SHA256}")
+      URL_HASH "SHA256=${ASSISTANT_LLAMA_SOURCE_SHA256}"
+      PATCH_COMMAND "${CMAKE_COMMAND}" "-DLLAMA_SOURCE_DIR=<SOURCE_DIR>"
+                    -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/IncrementalVulkanShaders.cmake")
     FetchContent_MakeAvailable(assistant_llama)
     set(_assistant_llama_source "${assistant_llama_SOURCE_DIR}")
   endif()

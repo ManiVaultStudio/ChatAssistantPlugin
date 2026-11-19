@@ -185,6 +185,50 @@ QIcon chatIcon(const QString &name, const QColor &color) {
     return QIcon(pix);
 }
 
+QString readableTutorialMarkdown(const QString &text) {
+    static const QRegularExpression html(
+        R"(<(?:div|details|summary|span|img|br|b|strong|em)\b|<!--)",
+        QRegularExpression::CaseInsensitiveOption);
+    if (!html.match(text).hasMatch())
+        return text;
+
+    static const QRegularExpression markup(
+        R"rx((?<code>^[ \t]*(?:\x60{3,}|~{3,})[^\n]*\n[\s\S]*?(?:^[ \t]*(?:\x60{3,}|~{3,})[ \t]*$|\z)|\x60+[^\n\x60]+\x60+)|<!--[\s\S]*?(?:-->|\z)|(?<icon><i\b[^>]*>\s*</i\s*>)|<(?<closing>/)?(?<tag>div|details|summary|span|img|br|b|strong|em|ul|ol|li|p)\b(?<attributes>[^<>]*)>)rx",
+        QRegularExpression::CaseInsensitiveOption | QRegularExpression::MultilineOption);
+    QString markdown;
+    qsizetype position = 0;
+    auto tokens = markup.globalMatch(text);
+    while (tokens.hasNext()) {
+        const auto token = tokens.next();
+        auto preceding = text.mid(position, token.capturedStart() - position);
+        if (preceding.contains('\n') && preceding.trimmed().isEmpty() &&
+            token.capturedStart("code") < 0)
+            preceding.clear();
+        markdown += preceding;
+        position = token.capturedEnd();
+        const auto tag = token.captured("tag").toLower();
+        const bool closing = token.capturedStart("closing") >= 0;
+        if (token.capturedStart("code") >= 0)
+            markdown += token.captured();
+        else if (token.captured("icon").contains("fa-paintbrush", Qt::CaseInsensitive))
+            markdown += "the paintbrush menu";
+        else if (tag == "summary") {
+            markdown += closing ? "\n\n" : token.captured("attributes").contains("section-header")
+                                               ? "\n\n### "
+                                               : "\n\n";
+        } else if (tag == "b" || tag == "strong")
+            markdown += "**";
+        else if (tag == "em")
+            markdown += "*";
+        else if (tag == "li" && !closing)
+            markdown += "\n- ";
+        else if (tag == "br" || tag == "div" || tag == "p" || tag == "details" || tag == "ul" || tag == "ol")
+            markdown += "\n\n";
+    }
+    markdown += text.mid(position);
+    return markdown.trimmed();
+}
+
 void chatTip(QWidget *w, const QString &title, const QString &text, const QString &shortcut) {
     qttooltipkit::Options o;
     o.widthPixels = 300;

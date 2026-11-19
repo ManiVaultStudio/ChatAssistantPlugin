@@ -12,7 +12,7 @@ The release checks include:
 - Direct saved-message editing, edit/resubmit, imported groups, concurrent-view conflicts and rename races.
 - Per-user/per-installation storage isolation and read-only legacy import.
 - Real ManiVault action widgets and programmatic model synchronization.
-- Source retrieval for all 160 shipped suggested questions against the example training index.
+- Source retrieval for the shipped suggested-question library against the bundled search index.
 
 The default example-model smoke test verifies the documented Shift-click interaction for EvoViewer with paraphrased questions. Prepared first text has measured below 100 ms locally; initial model loading and unprepared prompts take longer. These timings do not guarantee instant responses on other hardware.
 

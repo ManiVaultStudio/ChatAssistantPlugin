@@ -41,7 +41,7 @@ Import a UTF-8 text file (one question per nonempty line) or JSON:
 
 Groups and subgroups collapse independently and are searchable. A group may contain both `questions` and another `groups` array. Libraries support up to six levels, 100 groups and 300 questions, in a file smaller than 1 MB. Reload after editing; export to save custom questions.
 
-The bundled replaceable example library contains 160 questions, with plugin categories such as Data Hierarchy and Data Properties; project categories for EvoViewer, SimianViewer, Gradient Surfer, ATAC Viewer, PathwayFinder, Basal Ganglia Drill-in and Cytosplore Patch-seq; and multi-plugin hyperspectral workflows. Viewer subcategories cover inputs, linked-plugin workflows and interpretation. These are prompts, not guaranteed answers: missing evidence must still be reported. All corpus-specific names live in the example JSON, not in inference logic. Replace the file for a different corpus; doing so does not retrain the model or alter its index.
+The bundled example library contains 30 questions across getting started, system views, image analysis, Cytosplore and biological data projects, and developer reference. The questions draw on the ManiVault Studio tutorials and ManiVault developer documentation. Replace the library file to use questions for another corpus. The model and search index are managed separately.
 
 ## Charts
 

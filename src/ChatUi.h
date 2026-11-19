@@ -11,6 +11,7 @@ struct ChatTheme {
     bool dark = false;
     static ChatTheme resolve(const QString &name, const QColor &accent, bool systemDark);
 };
+QString readableTutorialMarkdown(const QString &text);
 QIcon chatIcon(const QString &name, const QColor &color);
 void chatTip(QWidget *widget, const QString &title, const QString &description, const QString &shortcut = {});
 

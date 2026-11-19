@@ -2,898 +2,14 @@
   "version": 2,
   "groups": [
     {
-      "title": "General",
+      "title": "Getting started",
       "groups": [
-        {
-          "title": "Getting started",
-          "questions": [
-            {
-              "label": "Project overview",
-              "prompt": "Summarize the main purpose of the indexed software and cite the relevant documentation."
-            },
-            {
-              "label": "First steps",
-              "prompt": "Which getting-started tutorials are available in the indexed documentation?"
-            },
-            {
-              "label": "Requirements",
-              "prompt": "What are the documented installation requirements? Distinguish required and optional features."
-            }
-          ]
-        },
-        {
-          "title": "Explore the documentation",
-          "questions": [
-            {
-              "label": "Tutorial map",
-              "prompt": "List the available tutorials with a short description of each."
-            },
-            {
-              "label": "Explain a workflow",
-              "prompt": "Explain a documented workflow step by step, with source references."
-            },
-            {
-              "label": "Troubleshooting",
-              "prompt": "How do I find and filter log messages and tasks in the Logging and Tasks plugins when investigating a problem? Give documented steps."
-            }
-          ]
-        },
-        {
-          "title": "Research · Understand and compare",
-          "questions": [
-            {
-              "label": "Architecture",
-              "prompt": "Explain the documented architecture and the responsibilities of its main components."
-            },
-            {
-              "label": "Compare features",
-              "prompt": "Compare the main documented features in a concise table. State when information is missing."
-            }
-          ]
-        },
         {
           "title": "Installing ManiVault",
           "questions": [
             {
-              "label": "Installation steps",
-              "prompt": "How do I install ManiVault according to the indexed installing-manivault tutorial?"
-            },
-            {
-              "label": "Platform requirements",
-              "prompt": "Which platform requirements and installation prerequisites are documented in the ManiVault installation tutorial?"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "title": "Plugins",
-      "groups": [
-        {
-          "title": "Scatterplot",
-          "questions": [
-            {
-              "label": "Create a scatterplot",
-              "prompt": "How do I open data in the Scatterplot plugin? Use the documented scatterplot tutorial steps."
-            },
-            {
-              "label": "Colour points",
-              "prompt": "Which documented controls change point colouring in the Scatterplot plugin? Explain when to use them."
-            },
-            {
-              "label": "Select points",
-              "prompt": "How does selection work in the Scatterplot plugin, and how is it linked to other views? Cite documented interactions."
-            },
-            {
-              "label": "Compare linked plots",
-              "prompt": "How can multiple scatterplot views work together according to the tutorials? Explain documented linking and selection behaviour."
-            }
-          ]
-        },
-        {
-          "title": "Data Hierarchy",
-          "questions": [
-            {
-              "label": "Understand the hierarchy",
-              "prompt": "What does the Data Hierarchy plugin display, and how are datasets related? Use its tutorial."
-            },
-            {
-              "label": "Open a dataset in a view",
-              "prompt": "How do I open a dataset in a view from the Data Hierarchy plugin? Use only documented steps."
-            },
-            {
-              "label": "Parent and derived data",
-              "prompt": "Explain parent and derived datasets in ManiVault's Data Hierarchy using documented examples."
-            },
-            {
-              "label": "Dataset actions",
-              "prompt": "Which dataset actions are described in the Data Hierarchy tutorial? Explain their effects without inventing menu entries."
-            },
-            {
-              "label": "Search and filter datasets",
-              "prompt": "How do I search and filter datasets with the Data Hierarchy plugin? Follow its tutorial."
-            },
-            {
-              "label": "Choose hierarchy columns",
-              "prompt": "How do I configure the columns displayed by the Data Hierarchy plugin? Use the documented controls."
-            },
-            {
-              "label": "Hide and unhide data",
-              "prompt": "How do I hide, unhide and unhide all datasets in the Data Hierarchy? Explain the documented operations."
-            },
-            {
-              "label": "Lock and unlock data",
-              "prompt": "How do I lock or unlock datasets in the Data Hierarchy, and what does locking do according to the tutorial?"
-            },
-            {
-              "label": "Transform and analyse data",
-              "prompt": "How do I start documented analysis and transformation operations from the Data Hierarchy?"
-            },
-            {
-              "label": "Export or remove data",
-              "prompt": "How do export and remove dataset operations differ in the Data Hierarchy tutorial? Explain their documented consequences."
-            }
-          ]
-        },
-        {
-          "title": "Data Properties",
-          "questions": [
-            {
-              "label": "Inspect a dataset",
-              "prompt": "How do I inspect a dataset with the Data Properties plugin? Summarize the documented workflow."
-            },
-            {
-              "label": "Understand properties",
-              "prompt": "Which properties are explained in the Data Properties tutorial, and what do they mean?"
-            },
-            {
-              "label": "Properties versus hierarchy",
-              "prompt": "How do the Data Properties and Data Hierarchy plugins complement each other? Compare their documented responsibilities."
-            },
-            {
-              "label": "Check loaded data",
-              "prompt": "What do the documented Data Properties controls tell me about loaded data before analysis?"
-            },
-            {
-              "label": "Find a property",
-              "prompt": "How do I find a particular dataset property in the Data Properties plugin? Use the tutorial."
-            },
-            {
-              "label": "Edit dataset properties",
-              "prompt": "How do I edit dataset properties, and how are those changes saved according to the Data Properties tutorial?"
-            },
-            {
-              "label": "Open Data Properties",
-              "prompt": "Which ways to add the Data Properties plugin are documented?"
-            }
-          ]
-        },
-        {
-          "title": "Loaders and legends",
-          "questions": [
-            {
-              "label": "Supported input formats",
-              "prompt": "Which data formats and loader plugins are documented? Cite sources and do not assume unsupported formats."
-            },
-            {
-              "label": "Load HDF5 data",
-              "prompt": "What does the indexed documentation say about loading HDF5 data? Give documented requirements and user-facing steps."
-            },
-            {
-              "label": "Interpret legends",
-              "prompt": "What do the tutorials explain about legends and colour mapping? Describe how the relevant plugins support the analysis."
-            },
-            {
-              "label": "Coordinate plugin views",
-              "prompt": "How are selections coordinated across plugins in a documented viewer workflow? Explain the roles of the linked panels."
-            }
-          ]
-        },
-        {
-          "title": "ImageViewer",
-          "questions": [
-            {
-              "label": "Open an image dataset",
-              "prompt": "How do I open an image dataset in the ImageViewer plugin? Follow its indexed tutorial."
-            },
-            {
-              "label": "Layers and colour mapping",
-              "prompt": "How are image layers, contrast and colour maps controlled in the documented ImageViewer workflow?"
-            },
-            {
-              "label": "Coordinate image and scatterplot",
-              "prompt": "How does the ImageViewer tutorial combine the ImageViewer, Scatterplot and hSNE plugins? Explain documented linked interactions."
-            },
-            {
-              "label": "Compare image datasets",
-              "prompt": "How does the ImageViewer tutorial compare multiple image datasets side by side?"
-            },
-            {
-              "label": "Image selections and linking",
-              "prompt": "How are selections coordinated between ImageViewer and other views in the documented image workflow?"
-            },
-            {
-              "label": "Overlay images",
-              "prompt": "How do I overlay images according to the ImageViewer tutorial?"
-            },
-            {
-              "label": "Visualize derived images",
-              "prompt": "How do I visualize derived images and analysis results in ImageViewer?"
-            },
-            {
-              "label": "Choose dimensions and mappings",
-              "prompt": "How do I work with different dimensions and color mappings in ImageViewer?"
-            },
-            {
-              "label": "Convert selections into images",
-              "prompt": "How does the ImageViewer tutorial describe automatic image conversion from derived data and selections?"
-            }
-          ]
-        },
-        {
-          "title": "Logging",
-          "questions": [
-            {
-              "label": "Purpose and controls",
-              "prompt": "What does the Logging plugin do? Explain its documented controls using the logging-plugin tutorial."
-            },
-            {
-              "label": "Use it in a workflow",
-              "prompt": "How do I use the Logging plugin in ManiVault? Give verified steps from its tutorial."
-            },
-            {
-              "label": "Coordinate with other plugins",
-              "prompt": "How does the Logging plugin support work with other plugins? Use documented examples and state what is not covered."
-            },
-            {
-              "label": "Find log messages",
-              "prompt": "How do I find log messages in the Logging plugin? Follow its tutorial."
-            },
-            {
-              "label": "Filter log messages",
-              "prompt": "Which message filtering options are documented for the Logging plugin, and how do I use them?"
-            },
-            {
-              "label": "Choose logging columns",
-              "prompt": "How do I change the columns shown in the Logging plugin? Use documented controls only."
-            }
-          ]
-        },
-        {
-          "title": "Sample Scope",
-          "questions": [
-            {
-              "label": "Purpose and controls",
-              "prompt": "What does the Sample Scope plugin do? Explain its documented controls using the sample-scope-plugin tutorial."
-            },
-            {
-              "label": "Use it in a workflow",
-              "prompt": "How do I use the Sample Scope plugin in ManiVault? Give verified steps from its tutorial."
-            },
-            {
-              "label": "Coordinate with other plugins",
-              "prompt": "How does the Sample Scope plugin support work with other plugins? Use documented examples and state what is not covered."
-            },
-            {
-              "label": "Add Sample Scope",
-              "prompt": "How do I add the Sample Scope plugin from the main menu or from an existing view according to its tutorial?"
-            }
-          ]
-        },
-        {
-          "title": "Shared Parameters",
-          "questions": [
-            {
-              "label": "Purpose and controls",
-              "prompt": "What does the Shared Parameters plugin do? Explain its documented controls using the shared-parameters-plugin tutorial."
-            },
-            {
-              "label": "Use it in a workflow",
-              "prompt": "How do I use the Shared Parameters plugin in ManiVault? Give verified steps from its tutorial."
-            },
-            {
-              "label": "Coordinate with other plugins",
-              "prompt": "How does the Shared Parameters plugin support work with other plugins? Use documented examples and state what is not covered."
-            },
-            {
-              "label": "Find shared parameters",
-              "prompt": "How do I find shared parameters in the Shared Parameters plugin? Follow its tutorial."
-            },
-            {
-              "label": "Filter shared parameters",
-              "prompt": "How do I filter shared parameters and configure columns in the Shared Parameters plugin?"
-            },
-            {
-              "label": "Remove shared parameters",
-              "prompt": "What does the Shared Parameters tutorial document about removing shared parameters? Explain any stated effects."
-            }
-          ]
-        },
-        {
-          "title": "Tasks",
-          "questions": [
-            {
-              "label": "Purpose and controls",
-              "prompt": "What does the Tasks plugin do? Explain its documented controls using the tasks-plugin tutorial."
-            },
-            {
-              "label": "Use it in a workflow",
-              "prompt": "How do I use the Tasks plugin in ManiVault? Give verified steps from its tutorial."
-            },
-            {
-              "label": "Coordinate with other plugins",
-              "prompt": "How does the Tasks plugin support work with other plugins? Use documented examples and state what is not covered."
-            },
-            {
-              "label": "Find active tasks",
-              "prompt": "How do I find tasks in the Tasks plugin? Use its tutorial."
-            },
-            {
-              "label": "Filter task entries",
-              "prompt": "How do I filter task entries in the Tasks plugin? Explain the documented filters."
-            },
-            {
-              "label": "Choose task columns",
-              "prompt": "Which columns and column controls are documented for the Tasks plugin?"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "title": "Viewers and projects",
-      "groups": [
-        {
-          "title": "EvoViewer",
-          "groups": [
-            {
-              "title": "Overview and inputs",
-              "questions": [
-                {
-                  "label": "EvoViewer overview",
-                  "prompt": "What is Cytosplore EvoViewer for? Explain its research goals and the roles of its linked plugins using the tutorial and paper."
-                },
-                {
-                  "label": "Select multiple cell types",
-                  "prompt": "How do I select multiple cell types in the EvoViewer UI? Give the documented interaction and its effect on linked views."
-                }
-              ]
-            },
-            {
-              "title": "Workflows and linked plugins",
-              "questions": [
-                {
-                  "label": "EvoViewer first workflow",
-                  "prompt": "Walk me through the documented EvoViewer tutorial from required data to an initial analysis. Identify the plugins or panels used."
-                },
-                {
-                  "label": "Compare across species",
-                  "prompt": "How does EvoViewer support comparison across species? Explain the documented workflow across its linked plugins."
-                }
-              ]
-            },
-            {
-              "title": "Interpretation and evidence",
-              "questions": [
-                {
-                  "label": "Interpret evolutionary patterns",
-                  "prompt": "How should conserved evolutionary patterns in EvoViewer be interpreted? Use the tutorial and paper, separating findings from UI instructions."
-                }
-              ]
-            },
-            {
-              "title": "Specific tutorial workflows",
-              "questions": [
-                {
-                  "label": "Zoom through cell types",
-                  "prompt": "How do I zoom into and out of the cell-type hierarchy in EvoViewer? Use its indexed tutorial, cite the evidence and do not invent controls."
-                },
-                {
-                  "label": "Free-form cell selections",
-                  "prompt": "How do I make free-form cell selections in EvoViewer and connect them to other views? Use its indexed tutorial, cite the evidence and do not invent controls."
-                },
-                {
-                  "label": "Compute cell characteristics",
-                  "prompt": "How do I compute gene and cell-type characteristics in EvoViewer and change the documented options? Use its indexed tutorial, cite the evidence and do not invent controls."
-                },
-                {
-                  "label": "Compare cell abundance",
-                  "prompt": "How do I compare cell abundance across species in EvoViewer, including sorting species and exploring table values? Use its indexed tutorial, cite the evidence and do not invent controls."
-                },
-                {
-                  "label": "Rank interesting genes",
-                  "prompt": "How do I identify interesting genes in EvoViewer and adjust the documented thresholds? Use its indexed tutorial, cite the evidence and do not invent controls."
-                },
-                {
-                  "label": "Explore gene relevance",
-                  "prompt": "How do I select a gene and examine its relevance across species in EvoViewer, including missed species? Use its indexed tutorial, cite the evidence and do not invent controls."
-                },
-                {
-                  "label": "Explore prior knowledge",
-                  "prompt": "How do I compare species by prior knowledge and switch attributes in the EvoViewer tree? Use its indexed tutorial, cite the evidence and do not invent controls."
-                },
-                {
-                  "label": "Export tree and table results",
-                  "prompt": "How do I save table data and tree data from EvoViewer according to its tutorial? Use its indexed tutorial, cite the evidence and do not invent controls."
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "title": "SimianViewer",
-          "groups": [
-            {
-              "title": "Overview and inputs",
-              "questions": [
-                {
-                  "label": "SimianViewer overview",
-                  "prompt": "What is Cytosplore SimianViewer designed to explore? Explain its purpose using the tutorial and paper."
-                },
-                {
-                  "label": "SimianViewer inputs",
-                  "prompt": "What input data and preparation are required for SimianViewer according to its documentation?"
-                }
-              ]
-            },
-            {
-              "title": "Workflows and linked plugins",
-              "questions": [
-                {
-                  "label": "SimianViewer first workflow",
-                  "prompt": "Walk me through the documented SimianViewer tutorial. Identify which plugins or views are used at each stage."
-                },
-                {
-                  "label": "Explore linked views",
-                  "prompt": "How do SimianViewer's linked views support its analysis? Describe documented selection and comparison interactions."
-                }
-              ]
-            },
-            {
-              "title": "Interpretation and evidence",
-              "questions": [
-                {
-                  "label": "Interpret SimianViewer results",
-                  "prompt": "Which scientific findings and limitations are described in the SimianViewer paper? Relate them to the tutorial without inventing controls."
-                }
-              ]
-            },
-            {
-              "title": "Specific tutorial workflows",
-              "questions": [
-                {
-                  "label": "Choose species and neighborhoods",
-                  "prompt": "How do I select species and neighborhoods in SimianViewer to find cross-species clusters? Use its indexed tutorial, cite the evidence and do not invent controls."
-                },
-                {
-                  "label": "Compare in-species attributes",
-                  "prompt": "How do I explore and compare in-species cluster attributes in SimianViewer? Use its indexed tutorial, cite the evidence and do not invent controls."
-                },
-                {
-                  "label": "Select a cross-species cluster",
-                  "prompt": "How do I select a cross-species cluster in SimianViewer and explore its mean and differential expression values? Use its indexed tutorial, cite the evidence and do not invent controls."
-                },
-                {
-                  "label": "Find a gene",
-                  "prompt": "How do I search for a gene in SimianViewer according to its tutorial? Use its indexed tutorial, cite the evidence and do not invent controls."
-                },
-                {
-                  "label": "Explore regulatory annotations",
-                  "prompt": "How do I explore HARs, HCONDELs and HAQERs in SimianViewer? Explain only what its tutorial documents. Use its indexed tutorial, cite the evidence and do not invent controls."
-                },
-                {
-                  "label": "Compare cluster expression",
-                  "prompt": "How do I compare mean and differential gene expression across species by cluster in SimianViewer? Use its indexed tutorial, cite the evidence and do not invent controls."
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "title": "Gradient Surfer",
-          "groups": [
-            {
-              "title": "Overview and inputs",
-              "questions": [
-                {
-                  "label": "Gradient Surfer overview",
-                  "prompt": "What questions does Cytosplore Gradient Surfer help answer? Explain its documented purpose and main views."
-                },
-                {
-                  "label": "Gradient Surfer inputs",
-                  "prompt": "What data and preparation does Gradient Surfer require according to its tutorial and paper?"
-                }
-              ]
-            },
-            {
-              "title": "Workflows and linked plugins",
-              "questions": [
-                {
-                  "label": "Gradient Surfer first workflow",
-                  "prompt": "Walk me through the documented Gradient Surfer tutorial and explain how its plugins work together."
-                },
-                {
-                  "label": "Explore gradients",
-                  "prompt": "How does the documented Gradient Surfer workflow explore gradients and inspect related data across linked views?"
-                }
-              ]
-            },
-            {
-              "title": "Interpretation and evidence",
-              "questions": [
-                {
-                  "label": "Interpret gradients",
-                  "prompt": "How should Gradient Surfer results be interpreted, and what limitations are reported in its paper? Separate interpretation from UI instructions."
-                }
-              ]
-            },
-            {
-              "title": "Specific tutorial workflows",
-              "questions": [
-                {
-                  "label": "Select along a spatial line",
-                  "prompt": "How do I select cells along a spatial line in Gradient Surfer? Use its indexed tutorial, cite the evidence and do not invent controls."
-                },
-                {
-                  "label": "Find gradient genes",
-                  "prompt": "How do I identify and select genes with expression gradients along a line in Gradient Surfer? Use its indexed tutorial, cite the evidence and do not invent controls."
-                },
-                {
-                  "label": "Compute shared gradient PCA",
-                  "prompt": "How do I compute PCA to summarize expression gradients and integrate datasets into a shared gradient space in Gradient Surfer? Use its indexed tutorial, cite the evidence and do not invent controls."
-                },
-                {
-                  "label": "Choose a principal component",
-                  "prompt": "How do I explore and select a principal component to discover dataset-specific expression components in Gradient Surfer? Use its indexed tutorial, cite the evidence and do not invent controls."
-                },
-                {
-                  "label": "Compute expression correlation",
-                  "prompt": "How do I compute expression correlation in Gradient Surfer according to its tutorial? Use its indexed tutorial, cite the evidence and do not invent controls."
-                },
-                {
-                  "label": "Find similarly graded genes",
-                  "prompt": "How do I identify genes with similar gradients within each dataset in Gradient Surfer? Use its indexed tutorial, cite the evidence and do not invent controls."
-                },
-                {
-                  "label": "Use automatic computation",
-                  "prompt": "How do I use the auto-compute option documented in the Gradient Surfer tutorial? Use its indexed tutorial, cite the evidence and do not invent controls."
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "title": "ATAC Viewer",
-          "groups": [
-            {
-              "title": "Overview and inputs",
-              "questions": [
-                {
-                  "label": "ATAC Viewer overview",
-                  "prompt": "What is Cytosplore ATAC Viewer designed for? Summarize its documented purpose and views."
-                },
-                {
-                  "label": "ATAC Viewer inputs",
-                  "prompt": "Which input data and preprocessing requirements are documented for ATAC Viewer? Do not infer unsupported formats."
-                }
-              ]
-            },
-            {
-              "title": "Workflows and linked plugins",
-              "questions": [
-                {
-                  "label": "ATAC Viewer first workflow",
-                  "prompt": "Walk me through the ATAC Viewer tutorial. Explain how its plugins contribute to the workflow."
-                },
-                {
-                  "label": "ATAC linked selections",
-                  "prompt": "How do selections and linked views work in the documented ATAC Viewer workflow? Give verified user-facing steps."
-                }
-              ]
-            },
-            {
-              "title": "Interpretation and evidence",
-              "questions": [
-                {
-                  "label": "Interpret ATAC results",
-                  "prompt": "What interpretation guidance and limitations are described in the indexed ATAC Viewer documentation? State what is not covered."
-                }
-              ]
-            },
-            {
-              "title": "Specific tutorial workflows",
-              "questions": [
-                {
-                  "label": "Visualize an RNA gene",
-                  "prompt": "How do I select and visualize an RNA gene in Cytosplore ATAC Viewer? Use its indexed tutorial, cite the evidence and do not invent controls."
-                },
-                {
-                  "label": "Visualize an ATAC peak",
-                  "prompt": "How do I select and visualize an ATAC peak in Cytosplore ATAC Viewer? Use its indexed tutorial, cite the evidence and do not invent controls."
-                },
-                {
-                  "label": "RNA to ATAC exploration",
-                  "prompt": "How do I find ATAC peaks with spatial patterns similar to an RNA gene in ATAC Viewer? Use its indexed tutorial, cite the evidence and do not invent controls."
-                },
-                {
-                  "label": "ATAC to RNA exploration",
-                  "prompt": "How do I find RNA genes with spatial patterns similar to an ATAC peak in ATAC Viewer? Use its indexed tutorial, cite the evidence and do not invent controls."
-                },
-                {
-                  "label": "Inspect spatial gene measurements",
-                  "prompt": "How do I inspect a spatially measured gene in ATAC Viewer? Use its indexed tutorial, cite the evidence and do not invent controls."
-                },
-                {
-                  "label": "Compute and visualize PC1",
-                  "prompt": "How do I compute and visualize the first principal component of a feature set in ATAC Viewer? Use its indexed tutorial, cite the evidence and do not invent controls."
-                },
-                {
-                  "label": "Rank and export features",
-                  "prompt": "How do I adjust the number of ranked features and export ranked features in ATAC Viewer? Use its indexed tutorial, cite the evidence and do not invent controls."
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "title": "PathwayFinder",
-          "groups": [
-            {
-              "title": "Overview and inputs",
-              "questions": [
-                {
-                  "label": "Purpose and research questions",
-                  "prompt": "What is PathwayFinder designed to explore? Use its indexed tutorial and identify any missing evidence."
-                },
-                {
-                  "label": "Required data and setup",
-                  "prompt": "What data and setup are required by the documented PathwayFinder workflow? Distinguish required and optional components."
-                }
-              ]
-            },
-            {
-              "title": "Workflows and linked plugins",
-              "questions": [
-                {
-                  "label": "Guided first workflow",
-                  "prompt": "Walk me through the documented PathwayFinder tutorial. Explain the role of each plugin or panel at each stage."
-                },
-                {
-                  "label": "Coordinate plugins",
-                  "prompt": "Which plugins are used together in PathwayFinder, and how are their interactions coordinated? Use documented information only."
-                },
-                {
-                  "label": "Selection and exploration",
-                  "prompt": "How do I select and explore data across the linked views in PathwayFinder? Give only verified tutorial steps."
-                },
-                {
-                  "label": "Understand the interface",
-                  "prompt": "Explain the interface overview in the PathwayFinder tutorial and how its panels contribute to the workflow."
-                },
-                {
-                  "label": "Follow a complete analysis",
-                  "prompt": "Describe a complete analysis example from the PathwayFinder tutorial with references to the plugin interactions involved."
-                }
-              ]
-            },
-            {
-              "title": "Interpretation and troubleshooting",
-              "questions": [
-                {
-                  "label": "Interpret the results",
-                  "prompt": "What interpretation guidance is documented for PathwayFinder? Cite supporting evidence and state what is not covered."
-                },
-                {
-                  "label": "Troubleshooting",
-                  "prompt": "What troubleshooting advice or limitations are documented for PathwayFinder? Do not invent controls or fixes."
-                }
-              ]
-            },
-            {
-              "title": "Specific tutorial workflows",
-              "questions": [
-                {
-                  "label": "Choose selection modes",
-                  "prompt": "How do I choose selection modes and make selections in PathwayFinder? Use its indexed tutorial, cite the evidence and do not invent controls."
-                },
-                {
-                  "label": "Run GO enrichment",
-                  "prompt": "How do I configure and run GO enrichment analysis in PathwayFinder? Use its indexed tutorial, cite the evidence and do not invent controls."
-                },
-                {
-                  "label": "Explore a GO term",
-                  "prompt": "How do I select a GO term and explore its associated genes in PathwayFinder? Use its indexed tutorial, cite the evidence and do not invent controls."
-                },
-                {
-                  "label": "Adjust gene-cell links",
-                  "prompt": "How do I adjust gene-cell link thresholds in PathwayFinder? Use its indexed tutorial, cite the evidence and do not invent controls."
-                },
-                {
-                  "label": "Colour by metadata",
-                  "prompt": "How do I use metadata coloring in PathwayFinder? Use its indexed tutorial, cite the evidence and do not invent controls."
-                },
-                {
-                  "label": "Explore multiple scales",
-                  "prompt": "How do I use multi-scale exploration and hovering on the gene embedding in PathwayFinder? Use its indexed tutorial, cite the evidence and do not invent controls."
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "title": "Basal Ganglia Drill-in",
-          "groups": [
-            {
-              "title": "Overview and inputs",
-              "questions": [
-                {
-                  "label": "Purpose and research questions",
-                  "prompt": "What is Basal Ganglia Drill designed to explore? Use its indexed tutorial and identify any missing evidence."
-                },
-                {
-                  "label": "Required data and setup",
-                  "prompt": "What data and setup are required by the documented Basal Ganglia Drill workflow? Distinguish required and optional components."
-                }
-              ]
-            },
-            {
-              "title": "Workflows and linked plugins",
-              "questions": [
-                {
-                  "label": "Guided first workflow",
-                  "prompt": "Walk me through the documented Basal Ganglia Drill tutorial. Explain the role of each plugin or panel at each stage."
-                },
-                {
-                  "label": "Coordinate plugins",
-                  "prompt": "Which plugins are used together in Basal Ganglia Drill, and how are their interactions coordinated? Use documented information only."
-                },
-                {
-                  "label": "Selection and exploration",
-                  "prompt": "How do I select and explore data across the linked views in Basal Ganglia Drill? Give only verified tutorial steps."
-                },
-                {
-                  "label": "Refine an HSNE selection",
-                  "prompt": "How do I refine selections with HSNE in the Basal Ganglia Drill-in tutorial, and what happens to linked views?"
-                },
-                {
-                  "label": "Compare species and gene expression",
-                  "prompt": "How does the Basal Ganglia Drill-in project coordinate cell taxonomy, species, embeddings and differential expression? Use its tutorial."
-                }
-              ]
-            },
-            {
-              "title": "Interpretation and troubleshooting",
-              "questions": [
-                {
-                  "label": "Interpret the results",
-                  "prompt": "What interpretation guidance is documented for Basal Ganglia Drill? Cite supporting evidence and state what is not covered."
-                },
-                {
-                  "label": "Troubleshooting",
-                  "prompt": "What troubleshooting advice or limitations are documented for Basal Ganglia Drill? Do not invent controls or fixes."
-                }
-              ]
-            },
-            {
-              "title": "Specific tutorial workflows",
-              "questions": [
-                {
-                  "label": "Restore hidden HSNE views",
-                  "prompt": "How do I show the hidden top-level HSNE embedding in the Basal Ganglia Drill-in project? Use its indexed tutorial, cite the evidence and do not invent controls."
-                },
-                {
-                  "label": "Rearrange viewer panels",
-                  "prompt": "How do I detach and re-attach views in the Basal Ganglia Drill-in project? Use its indexed tutorial, cite the evidence and do not invent controls."
-                },
-                {
-                  "label": "Change scatterplot settings",
-                  "prompt": "Which Coloring and Plot settings are documented for scatterplots in the Basal Ganglia Drill-in tutorial? Use its indexed tutorial, cite the evidence and do not invent controls."
-                },
-                {
-                  "label": "Compare differential expression",
-                  "prompt": "How do I compute and inspect differential expression in the Basal Ganglia Drill-in workflow? Use its indexed tutorial, cite the evidence and do not invent controls."
-                },
-                {
-                  "label": "Zoom and refine cell selections",
-                  "prompt": "How do zooming and refining selections work together in the Basal Ganglia Drill-in tutorial? Use its indexed tutorial, cite the evidence and do not invent controls."
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "title": "Cytosplore Patch-seq",
-          "groups": [
-            {
-              "title": "Overview and inputs",
-              "questions": [
-                {
-                  "label": "Purpose and requirements",
-                  "prompt": "What is Cytosplore Patch-seq designed for, and what data does its indexed tutorial require?"
-                }
-              ]
-            },
-            {
-              "title": "Workflows and linked plugins",
-              "questions": [
-                {
-                  "label": "Guided first workflow",
-                  "prompt": "Walk me through the documented Cytosplore Patch-seq tutorial and explain how its plugins work together."
-                },
-                {
-                  "label": "Linked exploration",
-                  "prompt": "How do the linked views in Cytosplore Patch-seq support data exploration? Give only documented interactions."
-                },
-                {
-                  "label": "Compare morphology, ephys and RNA",
-                  "prompt": "How do I use the coordinated morphology, electrophysiology and transcriptomic UMAP views in the Cytosplore Patch-seq tutorial?"
-                },
-                {
-                  "label": "Inspect cells and features",
-                  "prompt": "How do Cell View, Feature Explorer and Feature Plot work together in the Patch-seq tutorial? Give documented interactions."
-                }
-              ]
-            },
-            {
-              "title": "Specific tutorial workflows",
-              "questions": [
-                {
-                  "label": "Change UMAP selection mechanism",
-                  "prompt": "How do I change the selection mechanism for UMAP views in the Patch-seq viewer? Use its indexed tutorial, cite the evidence and do not invent controls."
-                },
-                {
-                  "label": "Colour UMAP by metadata",
-                  "prompt": "How do I color a UMAP by metadata in the Patch-seq viewer? Use its indexed tutorial, cite the evidence and do not invent controls."
-                },
-                {
-                  "label": "Colour UMAP by data features",
-                  "prompt": "How do I color a UMAP by data features in the Patch-seq viewer? Use its indexed tutorial, cite the evidence and do not invent controls."
-                },
-                {
-                  "label": "Use the Feature Explorer",
-                  "prompt": "How do I use the Feature Explorer in the Patch-seq viewer and connect it to the other views? Use its indexed tutorial, cite the evidence and do not invent controls."
-                },
-                {
-                  "label": "Inspect morphology and ephys",
-                  "prompt": "How do I use Cell View to inspect selected cell morphologies and electrophysiology traces in the Patch-seq viewer? Use its indexed tutorial, cite the evidence and do not invent controls."
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "title": "Multi-plugin workflows",
-      "groups": [
-        {
-          "title": "Hyperspectral image analysis",
-          "groups": [
-            {
-              "title": "t-SNE workflow",
-              "questions": [
-                {
-                  "label": "Start the t-SNE image tutorial",
-                  "prompt": "Walk me through the documented hyperspectral image analysis tutorial using t-SNE. Explain how the plugins work together."
-                },
-                {
-                  "label": "Interpret the linked views",
-                  "prompt": "How are image and embedding views used together in the hyperspectral t-SNE tutorial? Cite documented selection and interpretation guidance."
-                }
-              ]
-            },
-            {
-              "title": "HSNE workflow",
-              "questions": [
-                {
-                  "label": "Start the HSNE image tutorial",
-                  "prompt": "Walk me through the documented hyperspectral image analysis tutorial using HSNE. Identify the plugins and their roles."
-                },
-                {
-                  "label": "Explore hierarchy and images",
-                  "prompt": "How does the hyperspectral HSNE tutorial connect hierarchical exploration and image views? Use the documented workflow."
-                }
-              ]
+              "label": "Windows installation",
+              "prompt": "What graphics support does the ManiVault Windows installation tutorial require, and which installer options does it describe?"
             }
           ]
         },
@@ -901,21 +17,220 @@
           "title": "Basic data operations",
           "questions": [
             {
-              "label": "Import data",
-              "prompt": "Which three data import methods are described in the basic data operations tutorial?"
+              "label": "Import a dataset",
+              "prompt": "Where can I start a data import in ManiVault Studio?"
             },
             {
-              "label": "Create and populate views",
-              "prompt": "How do I create a view and load datasets into it according to the basic data operations tutorial?"
+              "label": "Open a dataset in a view",
+              "prompt": "How do I create a compatible data view from a dataset in the ManiVault Data Hierarchy?"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "System views",
+      "groups": [
+        {
+          "title": "Data Hierarchy",
+          "questions": [
+            {
+              "label": "Hide and restore datasets",
+              "prompt": "How do I hide a dataset and restore it in the ManiVault Data Hierarchy?"
             },
             {
-              "label": "Transform and export results",
-              "prompt": "How do I transform data and export results in the documented basic data operations workflow?"
+              "label": "Lock datasets",
+              "prompt": "How do I lock and unlock datasets in the ManiVault Data Hierarchy?"
+            }
+          ]
+        },
+        {
+          "title": "Data Properties",
+          "questions": [
+            {
+              "label": "Find dataset and analysis properties",
+              "prompt": "Which kinds of properties can I view, edit, and search for in the ManiVault Data Properties plugin?"
+            }
+          ]
+        },
+        {
+          "title": "Logging and Tasks",
+          "questions": [
+            {
+              "label": "Find log messages",
+              "prompt": "What records does the ManiVault Logging plugin show, and what controls does it offer for narrowing the list?"
+            },
+            {
+              "label": "Monitor tasks",
+              "prompt": "Which tasks does the ManiVault Tasks plugin list, and when is it useful to open the view?"
+            }
+          ]
+        },
+        {
+          "title": "Shared Parameters",
+          "questions": [
+            {
+              "label": "Read the parameter tree",
+              "prompt": "What do the top-level and child items represent in the ManiVault Shared Parameters tree, and how do simplified and expert modes differ?"
+            }
+          ]
+        },
+        {
+          "title": "Sample Scope",
+          "questions": [
+            {
+              "label": "Add Sample Scope",
+              "prompt": "What does ManiVault Sample Scope display, and where can I add it from the main menu?"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Image analysis",
+      "groups": [
+        {
+          "title": "Image Viewer",
+          "questions": [
+            {
+              "label": "Adjust image overlays",
+              "prompt": "Where do I adjust the position, scale, and color settings of overlaid images in ManiVault Image Viewer?"
+            },
+            {
+              "label": "Trace a selection back to the image",
+              "prompt": "How does a selection in a linked embedding view help me locate the original image regions in ManiVault Image Viewer?"
+            }
+          ]
+        },
+        {
+          "title": "Hyperspectral workflows",
+          "questions": [
+            {
+              "label": "Recolor with t-SNE clusters",
+              "prompt": "In the hyperspectral t-SNE tutorial, which clustering method is used and how is the resulting clusters dataset used to recolor the image?"
+            },
+            {
+              "label": "Refine an HSNE embedding",
+              "prompt": "In the hyperspectral HSNE tutorial, how do I drill into a region of the top-level embedding, and where is the refined scale displayed?"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Cytosplore and biological data projects",
+      "groups": [
+        {
+          "title": "EvoViewer",
+          "questions": [
+            {
+              "label": "Select multiple cell types",
+              "prompt": "How do I select multiple cell types in the Cytosplore EvoViewer cell type hierarchy?"
+            },
+            {
+              "label": "Compare cell abundance",
+              "prompt": "How do absolute and relative cell abundance differ in Cytosplore EvoViewer’s species comparison?"
+            }
+          ]
+        },
+        {
+          "title": "SimianViewer",
+          "questions": [
+            {
+              "label": "Explore the species heatmap",
+              "prompt": "How do I choose the species and neighborhood in Cytosplore SimianViewer and select a cross-species cluster from the heatmap?"
+            },
+            {
+              "label": "Compare gene expression modes",
+              "prompt": "How do I switch between all-species and human-versus-other-species gene expression in Cytosplore SimianViewer?"
+            }
+          ]
+        },
+        {
+          "title": "Gradient Surfer",
+          "questions": [
+            {
+              "label": "Select along a spatial line",
+              "prompt": "How do I select cells along a spatial line in Cytosplore Gradient Surfer and change the width of the selection?"
+            },
+            {
+              "label": "Compute PCA across datasets",
+              "prompt": "How do I choose positive or negative gradient genes and use them to compute PCA across datasets in Cytosplore Gradient Surfer?"
+            }
+          ]
+        },
+        {
+          "title": "ATACViewer",
+          "questions": [
+            {
+              "label": "Rank peaks and genes by correlation",
+              "prompt": "How do I use GeneSurfer in Cytosplore ATACViewer to rank ATAC peaks from a seed RNA gene or rank RNA genes from a seed ATAC peak?"
+            },
+            {
+              "label": "Interpret spatial map colors",
+              "prompt": "What do the colors on the mapped ATAC and RNA spatial plots in Cytosplore ATACViewer represent?"
+            }
+          ]
+        },
+        {
+          "title": "Patch-seq Viewer",
+          "questions": [
+            {
+              "label": "Follow linked UMAP selections",
+              "prompt": "What happens in the other UMAPs and open visualizations when I select cells in one UMAP in Cytosplore Patch-seq Viewer?"
+            }
+          ]
+        },
+        {
+          "title": "PathwayFinder",
+          "questions": [
+            {
+              "label": "Run GO enrichment",
+              "prompt": "How do I run Gene Ontology enrichment in PathwayFinder, and what happens when I click a term in the results?"
+            },
+            {
+              "label": "Filter gene-cell links",
+              "prompt": "How do the Log2FC and Background sliders affect the gene-cell links drawn in PathwayFinder?"
+            }
+          ]
+        },
+        {
+          "title": "Basal Ganglia Drill-in",
+          "questions": [
+            {
+              "label": "Compare two cell selections",
+              "prompt": "How do I compare differential expression between two selections in the Basal Ganglia Drill-in project, and what expression values does the project use?"
+            },
+            {
+              "label": "Re-embed marmoset cells",
+              "prompt": "How do I create and display a new UMAP of the marmoset scVI subset in the Basal Ganglia Drill-in project?"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Developer reference",
+      "groups": [
+        {
+          "title": "Projects and workspaces",
+          "questions": [
+            {
+              "label": "Project and workspace state",
+              "prompt": "In the ManiVault Core API, what state does a project serialize, and what layout responsibilities belong to a workspace?"
+            },
+            {
+              "label": "Open or import a project",
+              "prompt": "In the ManiVault project manager API, how does opening a project differ from importing one?"
+            },
+            {
+              "label": "Access Core managers",
+              "prompt": "Which CoreInterface.h accessors should a ManiVault plugin use to reach the data, plugin, project, and workspace managers?"
             }
           ]
         }
       ]
     }
   ],
-  "description": "Replaceable example questions based on the tutorial files in the bundled training index. No viewer-specific behaviour is built into the plugin."
+  "description": "Example questions grounded in the ManiVault Studio tutorials and ManiVault developer documentation."
 }

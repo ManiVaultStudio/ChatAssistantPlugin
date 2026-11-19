@@ -253,7 +253,9 @@ QString OfflineInference::makePrompt(const QString &question, const QList<Source
                                      const QStringList &history, bool chatMl, bool userHelp) const {
     const QString instructions =
         "You are Knowledge Assistant, a careful offline software guide. "
-        "Answer in 2-4 sentences or brief steps. Cite [number] for software claims. "
+        "Lead with the answer. Use short paragraphs and a numbered list for procedures. "
+        "Use bold for control names and inline code for identifiers. Add headings only for distinct "
+        "sections. Put [number] citations next to the claims they support. "
         "Use only documented UI procedures; say when evidence is missing. "
         "Never invent menus, classes or settings. Respect negation and optional features. "
         "Give code only when requested. Do not copy HTML or repeat excerpts. "

@@ -47,6 +47,7 @@ class ChatPanel final : public QWidget {
     void saveSettings();
     void applyTheme();
     void refreshPaths();
+    RetrievalResult retrieveSources(const QString &question, const InferenceSettings &settings);
     void setStatus(const QString &, bool);
     void toggleSettings(bool);
     void sendQuestion();
@@ -100,6 +101,9 @@ class ChatPanel final : public QWidget {
     mv::Task *hostTask_ = nullptr;
     QList<ConversationSummary> summaries_;
     QList<SourceHit> activeSources_;
+    QString retrievedQuestion_;
+    int retrievedLimit_ = 0;
+    RetrievalResult retrievedSources_;
     ChatTheme theme_;
     QColor accent_;
     QString packagePath_, runtimePath_, suggestionsPath_, replyText_, lastQuestion_;
@@ -109,7 +113,8 @@ class ChatPanel final : public QWidget {
     QObject *suggestionActions_ = nullptr;
     bool waiting_ = false, paused_ = false, followTail_ = true, adjustingScroll_ = false,
          loadingSettings_ = true, navigating_ = false, stoppedReply_ = false, refreshingChats_ = false;
-    int renderLimit_ = 80, streamMessage_ = -1, editIndex_ = -1;
+    static constexpr int messagePageSize_ = 24;
+    int renderLimit_ = messagePageSize_, streamMessage_ = -1, editIndex_ = -1;
     QElapsedTimer elapsed_;
     qint64 firstTextMs_ = -1;
     QJsonObject metrics_;

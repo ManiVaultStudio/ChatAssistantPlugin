@@ -14,6 +14,14 @@
 #endif
 
 namespace {
+class ReferenceBrowser final : public QTextBrowser {
+  public:
+    using QTextBrowser::QTextBrowser;
+
+  protected:
+    QVariant loadResource(int, const QUrl &) override { return {}; }
+};
+
 int streamRefreshMs(const QComboBox *control) {
     constexpr int intervals[]{16, 32, 64, 100};
     const int index = control->currentIndex();
@@ -109,10 +117,14 @@ ChatPanel::ChatPanel(QWidget *parent, bool initializeRuntime) : QWidget(parent),
             setStatus("History unavailable: " + error, false);
     }
     suggestions_ = defaultSuggestions();
-    if (!suggestionsPath_.isEmpty())
-        loadSuggestions(suggestionsPath_);
-    else
-        refreshSuggestions();
+    connect(sideTabs_, &QTabWidget::currentChanged, this, [this](int tab) {
+        if (tab != 1 || suggestionsFile_)
+            return;
+        if (!suggestionsPath_.isEmpty())
+            loadSuggestions(suggestionsPath_);
+        if (!suggestionsFile_)
+            refreshSuggestions();
+    });
     refreshChats();
     if (!summaries_.isEmpty())
         switchChat(summaries_.first().id);
@@ -186,10 +198,7 @@ ChatPanel::ChatPanel(QWidget *parent, bool initializeRuntime) : QWidget(parent),
         if (question.size() < 6)
             return;
         const auto settings = currentSettings();
-        const auto hits = settings.useKnowledge && index_.isOpen()
-                              ? index_.retrieve(question, settings.topK).hits
-                              : QList<SourceHit>{};
-        inference_.prepare(question, hits, history(), settings);
+        inference_.prepare(question, retrieveSources(question, settings).hits, history(), settings);
     });
     auto *clock = new QTimer(this);
     clock->setInterval(150);
@@ -204,14 +213,16 @@ ChatPanel::ChatPanel(QWidget *parent, bool initializeRuntime) : QWidget(parent),
     auto *refresh = new QTimer(this);
     refresh->setInterval(5000);
     connect(refresh, &QTimer::timeout, this, [this] {
-        if (isVisible() && !waiting_ && saveHistory_->isChecked())
+        if (sidebar_->isVisible() && sideTabs_->currentIndex() == 0 && !waiting_ &&
+            saveHistory_->isChecked())
             refreshChats();
     });
     refresh->start();
-    if (initializeRuntime)
-        refreshPaths();
-    else {
-        AssistantControls::setEnabled(sendButton_, false);
+    AssistantControls::setEnabled(sendButton_, false);
+    if (initializeRuntime) {
+        setStatus("Starting local assistant…", false);
+        QTimer::singleShot(0, this, &ChatPanel::refreshPaths);
+    } else {
         setStatus("Layout preview · No model loaded", false);
     }
 }
@@ -377,6 +388,8 @@ void ChatPanel::buildUi() {
     suggestionsLayout_->setSpacing(10);
     promptScroll->setWidget(suggestionsCanvas_);
     sideTabs_->addTab(promptScroll, "Questions");
+    sideTabs_->setTabToolTip(0, "Browse, search and organize your conversations");
+    sideTabs_->setTabToolTip(1, "Browse documented workflows or import a question library");
     connect(chatSearch_, &QLineEdit::textChanged, this, &ChatPanel::refreshChats);
     connect(chats_, &QListWidget::currentItemChanged, this, [this](QListWidgetItem *item) {
         if (item && !loadingSettings_ && item->data(Qt::UserRole).toString() != chat_.id)
@@ -728,6 +741,10 @@ void ChatPanel::buildSettings() {
     chatMl_ = AssistantControls::toggle(actionOwner, "Qwen ChatML prompt format", settingsPanel_);
     prepareWhileTyping_ =
         AssistantControls::toggle(actionOwner, "Prepare context while typing", settingsPanel_);
+    chatTip(includeSources_, "Ground answers", "Search the local index and pass matching excerpts to the model.");
+    chatTip(chatMl_, "Qwen ChatML", "Use the chat template expected by the bundled Qwen model.");
+    chatTip(prepareWhileTyping_, "Prepare context while typing",
+            "Start reading source context after a typing pause to reduce the wait after sending.");
     for (auto *w : {includeSources_, chatMl_, prepareWhileTyping_})
         answers->addRow(w);
     customInstructions_ = AssistantControls::text(actionOwner, "Response instructions", settingsPanel_);
@@ -982,6 +999,8 @@ void ChatPanel::applyTheme() {
     }
     setPalette(p);
     setAutoFillBackground(true);
+    sideTabs_->setTabIcon(0, chatIcon("chat", theme_.text));
+    sideTabs_->setTabIcon(1, chatIcon("file", theme_.text));
     messagesCanvas_->setPalette(p);
     messagesCanvas_->setAutoFillBackground(true);
     scroll_->viewport()->setPalette(p);
@@ -1142,6 +1161,9 @@ void ChatPanel::resizeEvent(QResizeEvent *e) {
     }
 }
 void ChatPanel::refreshPaths() {
+    retrievedQuestion_.clear();
+    retrievedLimit_ = 0;
+    retrievedSources_ = {};
     if (!QFileInfo(QDir(packagePath_).filePath("knowledge.db")).isFile() ||
         RuntimePaths::modelFile(packagePath_).isEmpty())
         packagePath_ = RuntimePaths::discoverPackage();
@@ -1165,6 +1187,19 @@ void ChatPanel::refreshPaths() {
               ready);
     if (!error.isEmpty())
         statusLabel_->setToolTip(error);
+}
+RetrievalResult ChatPanel::retrieveSources(const QString &question, const InferenceSettings &settings) {
+    if (!settings.useKnowledge || !index_.isOpen())
+        return {};
+    if (question == retrievedQuestion_ && settings.topK == retrievedLimit_)
+        return retrievedSources_;
+    const auto result = index_.retrieve(question, settings.topK);
+    if (result.error.isEmpty()) {
+        retrievedQuestion_ = question;
+        retrievedLimit_ = settings.topK;
+        retrievedSources_ = result;
+    }
+    return result;
 }
 void ChatPanel::setStatus(const QString &text, bool ready) {
     statusLabel_->setText(text);
@@ -1511,7 +1546,7 @@ QWidget *ChatPanel::messageWidget(const ChatMessage &message, int index) {
     connect(copySelection, &QAction::triggered, browser, &QTextBrowser::copy);
     connect(menu, &QMenu::aboutToShow, browser,
             [copySelection, browser] { copySelection->setEnabled(browser->textCursor().hasSelection()); });
-    QString markdown = message.text;
+    QString markdown = user ? message.text : readableTutorialMarkdown(message.text);
     const auto chart = showVisuals_->isChecked() ? ChatChart::fromMarkdown(markdown) : QJsonObject();
     if (!chart.isEmpty())
         markdown.remove(
@@ -1556,19 +1591,36 @@ QWidget *ChatPanel::messageWidget(const ChatMessage &message, int index) {
             bubble);
         auto *sources = new AssistantControls::VBoxLayout(group->body());
         sources->setContentsMargins(0, 3, 0, 0);
-        for (const auto &source : message.sources) {
-            auto *link = tool("file", source.location, "Read the supporting source excerpt", bubble);
+        for (qsizetype citation = 0; citation < message.sources.size(); ++citation) {
+            const auto &source = message.sources.at(citation);
+            const auto reference = QString("[%1] %2").arg(citation + 1).arg(source.location);
+            auto *link = tool("file", reference, "Open the formatted excerpt for this citation", bubble);
             link->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
             sources->addWidget(link);
-            chatTip(link, source.location, source.content.left(800));
-            AssistantControls::onTrigger(link, this, [this, source] {
+            AssistantControls::onTrigger(link, this, [this, source, reference] {
                 auto *d = new QDialog(this);
                 d->setAttribute(Qt::WA_DeleteOnClose);
-                d->setWindowTitle(source.location);
+                d->setWindowTitle("Reference " + reference);
                 d->resize(650, 480);
                 auto *l = new AssistantControls::VBoxLayout(d);
-                auto *text = new QTextBrowser;
-                text->setPlainText(source.content);
+                l->setContentsMargins(18, 16, 18, 16);
+                auto *heading = new QLabel(d);
+                heading->setTextFormat(Qt::PlainText);
+                heading->setText(reference);
+                heading->setObjectName("sectionTitle");
+                heading->setWordWrap(true);
+                l->addWidget(heading);
+                auto *text = new ReferenceBrowser(d);
+                text->setOpenLinks(false);
+                text->setOpenExternalLinks(false);
+                text->document()->setDefaultFont(QFont(font().family(), fontSize_->value()));
+                text->document()->setDocumentMargin(10);
+                if (source.kind == "document") {
+                    text->document()->setMarkdown(readableTutorialMarkdown(source.content),
+                                                  QTextDocument::MarkdownFeatures(QTextDocument::MarkdownDialectGitHub) | QTextDocument::MarkdownNoHTML);
+                } else {
+                    text->setPlainText(source.content);
+                }
                 l->addWidget(text);
                 auto *buttons = new QDialogButtonBox(QDialogButtonBox::Close);
                 l->addWidget(buttons);
@@ -1611,7 +1663,7 @@ void ChatPanel::renderMessages() {
                  "Load older messages without changing the current conversation", messagesCanvas_);
         messagesLayout_->addWidget(AssistantControls::container(earlier));
         AssistantControls::onTrigger(earlier, this, [this] {
-            renderLimit_ += 80;
+            renderLimit_ += messagePageSize_;
             followTail_ = false;
             renderMessages();
         });
@@ -1623,12 +1675,11 @@ void ChatPanel::renderMessages() {
         auto *l = new AssistantControls::VBoxLayout(welcome);
         l->setContentsMargins(24, 24, 24, 24);
         l->setSpacing(12);
-        auto *title = new QLabel("Your knowledge, one conversation away");
+        auto *title = new QLabel("Knowledge Assistant");
         title->setObjectName("sectionTitle");
         title->setWordWrap(true);
         l->addWidget(title);
-        l->addWidget(caption("Ask a focused question about your documents. Answers stay on this device, with "
-                             "the source passages available for review."));
+        l->addWidget(caption("Ask a question or choose a documented workflow from the question library."));
         auto *buttons = new AssistantControls::HBoxLayout;
         auto *library =
             tool("chat", "Question library", "Browse or import grouped suggested questions", welcome);
@@ -1667,8 +1718,9 @@ void ChatPanel::renderMessages() {
 void ChatPanel::renderStreaming() {
     if (!waiting_ || !pendingReply_)
         return;
-    pendingReply_->setProperty("assistantMarkdown", replyText_);
-    pendingReply_->setChatMarkdown(replyText_.isEmpty() ? "*Preparing your answer…*" : replyText_, theme_,
+    const auto markdown = readableTutorialMarkdown(replyText_);
+    pendingReply_->setProperty("assistantMarkdown", markdown);
+    pendingReply_->setChatMarkdown(markdown.isEmpty() ? "*Preparing your answer…*" : markdown, theme_,
                                    fontSize_->value());
     if (pendingRow_)
         pendingRow_->setProperty("messageText", replyText_);
@@ -1750,8 +1802,7 @@ void ChatPanel::sendQuestion() {
     stoppedReply_ = false;
     paused_ = false;
     updateProgress("search");
-    const auto retrieval =
-        settings.useKnowledge ? index_.retrieve(question, settings.topK) : RetrievalResult{};
+    const auto retrieval = retrieveSources(question, settings);
     activeSources_ = retrieval.hits;
     if (!retrieval.error.isEmpty()) {
 #ifdef ASSISTANT_MANIVAULT_ACTIONS
@@ -1992,7 +2043,7 @@ void ChatPanel::newChat() {
         chat_.group = groupFilter_->currentText().mid(7);
     if (groupFilter_->currentText() == "Pinned only")
         AssistantControls::select(groupFilter_, "All groups");
-    renderLimit_ = 80;
+    renderLimit_ = messagePageSize_;
     followTail_ = true;
     input_->clear();
     messageSearch_->clear();
@@ -2014,7 +2065,7 @@ void ChatPanel::switchChat(const QString &id) {
     if (next.id.isEmpty())
         return;
     chat_ = next;
-    renderLimit_ = 80;
+    renderLimit_ = messagePageSize_;
     followTail_ = true;
     input_->setPlainText(drafts_.value(id));
     messageSearch_->clear();
